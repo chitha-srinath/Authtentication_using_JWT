@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Login() {
     return (
         <div>
-            <form action="">
+            <form action="" maethod="">
                 <label htmlFor="">User Id / Email : </label><br />
                 <input type="text" name="" id="" /><br />
                 <label htmlFor="">Password : </label><br />
