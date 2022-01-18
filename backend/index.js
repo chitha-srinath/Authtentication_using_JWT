@@ -1,12 +1,12 @@
-// const express = require("express");
+const express = require("express");
 const mongoose = require("mongoose");
 
-// const bodyparser = require("body-parser");
+const bodyparser = require("body-parser");
 mongoose.connect('mongodb://localhost:27017/stateandcities');
-// const app = express();
-// app.use(bodyparser());
+const app = express();
+app.use(bodyparser());
 
-const cities = [
+const states = [
     {
         "id": "1",
         "name": "Mumbai",
@@ -3395,42 +3395,35 @@ stateSchema = new mongoose.Schema({
     state: { type: String, required: true }
 })
 
-const state = mongoose.model("stateCity", stateSchema);
-
-state.create(cities).then(() => console.log("data saved sucessfully")).catch((err) => console.log(err))
+const State = mongoose.model("Citydata", stateSchema);
 
 
-
-// app.post("/api/v1/", async (req, res) => {
-//     try {
-//         const city = await City.create({
-//             id: req.body.id,
-//             name: req.body.name,
-//             state: req.body.state,
-//         });
-//         return res.status(200).json({
-//             status: "success",
-//             city: city
-//         })
-//     } catch (e) {
-//         res.json({
-//             status: "failed",
-//             message: e.message
-//         })
-//     }
-// });
-// app.get("/api/v1/", async (req, res) => {
-//     try {
-//         const city = await City.find();
-//         res.status(200).json({
-//             status: "success",
-//             cities: city
-//         })
-//     } catch (e) {
-//         res.json({
-//             status: "failed GET",
-//             message: e.message
-//         })
-//     }
-// });
-// app.listen(3010);
+app.post("/api/v1/", async (req, res) => {
+    try {
+        const state = await State.create(states);
+        return res.status(200).json({
+            status: "success",
+            data : state
+        })
+    } catch (e) {
+        res.json({
+            status: "failed",
+            message: e.message
+        })
+    }
+});
+app.get("/api/v1/", async (req, res) => {
+    try {
+        const state = await State.find();
+        res.status(200).json({
+            status: "success",
+            states: state
+        })
+    } catch (e) {
+        res.json({
+            status: "failed GET",
+            message: e.message
+        })
+    }
+});
+app.listen(3010);
